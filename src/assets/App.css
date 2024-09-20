@@ -1,0 +1,155 @@
+.app {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .main-content {
+    display: flex;
+  }
+  
+  .content {
+    padding: 20px;
+    flex-grow: 1;
+  }
+  
+  .header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .sidebar {
+    background-color: #f4f4f4;
+    width: 200px;
+    padding: 20px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin-bottom: 10px;
+  }
+  
+  .sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .card-container {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+  }
+  
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .data-table th, .data-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  button {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border: none;
+  }
+  /* Asegúrate de que toda la pantalla esté cubierta */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Layout general */
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Toda la altura de la pantalla */
+}
+
+.header {
+  display: flex;          /* Usar flexbox para centrar */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center;    /* Centrar verticalmente */
+  height: 50px;           /* Altura del header (ajusta según sea necesario) */
+  background-color: #2c80f5; /* Color de fondo (opcional) */
+}
+.header h1 {
+  margin: 0;  
+  color: rgb(0, 0, 0);           /* Eliminar margen por defecto del h1 */
+}
+
+.main {
+  display: flex;
+  flex: 1; /* Ocupa el resto del espacio debajo del header */
+}
+
+/* Estilo del sidebar */
+aside {
+  background-color: #000000;
+  color: white;
+  width: 250px; /* Ancho del sidebar */
+  padding: 20px;
+  height: calc(100vh - 60px); /* Altura calculada restando el header */
+  box-sizing: border-box;
+}
+
+/* Estilo del contenido principal */
+.content {
+  flex: 1; /* El contenido ocupará todo el espacio restante */
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.sidebar {
+  background-color: #2c80f5;
+  width: 150px;
+  padding: 30px;
+  height: 350px
+}
+.sidebar ul li {
+  margin-bottom: 50px; /* Ajusta el espacio entre los elementos de la lista */
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.footer {
+  background-color: #000000; /* Color de fondo */
+  text-align: center; /* Centra el texto */
+  padding: 10px; /* Espaciado alrededor del texto */
+  position: fixed; /* Fija el footer en la parte inferior */
+  left: 0;
+  bottom: 0;
+  width: 100%; /* Abarca todo el ancho de la ventana */
+  font-size: 14px; /* Tamaño de fuente */
+  color: #ffffff; /* Color del texto */
+}
+
+.footer p {
+  margin: 5px 0; /* Espacio vertical entre párrafos */
+}
+
