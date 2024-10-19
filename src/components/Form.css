@@ -1,0 +1,14 @@
+.select-container {
+    max-height: 100px; /* Altura máxima del contenedor */
+    overflow-y: auto; /* Añadir scroll vertical */
+    width: 100%; /* Asegúrate de que ocupa el 100% del ancho */
+    border: 1px solid #ccc; /* Bordes para distinguir el contenedor */
+    margin-top: 5px; /* Espaciado superior */
+  }
+  
+
+.error-message {
+    color: red;
+    margin-top: 5px;
+  }
+  

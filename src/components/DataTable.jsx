@@ -23,14 +23,34 @@ function DataTable({ columns, data, onDelete }) {
       </thead>
       <tbody>
         {data.map((row, idx) => (
-          <tr key={idx}>
-            {columns.map((col) => (
-              <td key={col}>{row[columnMap[col]] !== undefined ? row[columnMap[col]] : 'N/A'}</td>
-            ))}
-            <td>
-              <button onClick={() => onDelete(row.id)}>Eliminar</button>
-            </td>
-          </tr>
+          <React.Fragment key={idx}>
+            <tr>
+              {columns.map((col) => (
+                <td key={col}>{row[columnMap[col]] !== undefined ? row[columnMap[col]] : 'N/A'}</td>
+              ))}
+              <td>
+                <button onClick={() => onDelete(row.id)}>Eliminar</button>
+              </td>
+            </tr>
+            {/* Fila adicional para mostrar las columnas y restricciones */}
+            {row.columnas && row.columnas.length > 0 && (
+              <tr>
+                <td colSpan={columns.length + 1}>
+                  <strong>Columnas:</strong>
+                  <ul>
+                    {row.columnas.map((col, i) => (
+                      <li key={i}>
+                        {col.nombre} - {col.tipo} 
+                        {col.restricciones.length > 0 && (
+                          <span> ({col.restricciones.join(', ')})</span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </td>
+              </tr>
+            )}
+          </React.Fragment>
         ))}
       </tbody>
     </table>
