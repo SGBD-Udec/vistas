@@ -1,0 +1,26 @@
+/* SelectModal.css */
+.options-container {
+    display: flex;
+    flex-direction: column; /* Alineación vertical */
+    margin-bottom: 20px; /* Espacio inferior */
+  }
+  
+  .option-button {
+    background-color: #7ED321; /* Color de fondo */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+    margin: 5px 0; /* Espaciado entre botones */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    transition: background-color 0.3s; /* Transición suave para el color de fondo */
+  }
+  
+  .option-button:hover {
+    background-color: #007B3E; /* Color de fondo al pasar el ratón */
+  }
+  
+  .selected {
+    background-color: #007B3E; /* Color de fondo para la opción seleccionada */
+  }
+  
