@@ -5,17 +5,13 @@ import Form from '../components/Form';
 
 function DataDictionary() {
   const [tables, setTables] = useState([]);
+  const [error, setError] = useState(null); // Para manejar mensajes de error
 
-  // Fetch de las tablas al cargar el componente
   const fetchTables = async () => {
-    console.log("Iniciando fetchTables...");
     try {
-      const response = await axios.get('http://localhost:5000/ejemplos');
-      console.log("Datos recibidos:", response.data);
+      const response = await axios.get('http://localhost:5000/tablas');
       if (Array.isArray(response.data)) {
-        setTables(response.data); // Almacena los datos en el estado
-      } else {
-        console.log("Los datos no son un arreglo:", response.data);
+        setTables(response.data);
       }
     } catch (error) {
       console.error("Error al cargar los datos:", error);
@@ -23,64 +19,63 @@ function DataDictionary() {
   };
 
   useEffect(() => {
-    fetchTables(); // Llama a la función de fetch
+    fetchTables();
   }, []);
 
-  // Función para agregar una nueva tabla
   const handleAddTable = async (formData) => {
     try {
-      const response = await axios.post('http://localhost:5000/ejemplos/agregar', formData);
-      console.log("Respuesta del servidor al agregar tabla:", response.data);
-      fetchTables(); // Actualiza la lista de tablas después de agregar
+      const response = await axios.post('http://localhost:5000/tablas/agregar', formData);
+      fetchTables();
+      setError(null); // Limpiar el mensaje de error si se agrega correctamente
     } catch (error) {
       console.error("Error al agregar la tabla:", error);
+      // Manejo de errores específico
+      if (error.response && error.response.data.error) {
+        setError(error.response.data.error); // Mostrar error del servidor
+      } else {
+        setError("Error desconocido. Inténtalo de nuevo."); // Error genérico
+      }
+    }
+  };
+  
+
+  const handleDeleteTable = async (id) => {
+    const confirmDelete = window.confirm("¿Estás seguro de que deseas borrar esta tabla?");
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:5000/tablas/${id}`);
+        setTables((prevTables) => prevTables.filter((table) => table.id !== id));
+      } catch (error) {
+        console.error("Error al borrar la tabla:", error);
+      }
     }
   };
 
- // Función para borrar una tabla con confirmación
-const handleDeleteTable = async (id) => {
-  const confirmDelete = window.confirm("¿Estás seguro de que deseas borrar esta tabla?");
-  if (confirmDelete) {
-    try {
-      await axios.delete(`http://localhost:5000/ejemplos/${id}`); // Usando la URL correcta
-      console.log(`Tabla con ID ${id} borrada`);
-
-      // Actualiza el estado eliminando la tabla localmente
-      setTables((prevTables) => prevTables.filter((table) => table.id !== id));
-      
-    } catch (error) {
-      console.error("Error al borrar la tabla:", error);
-      // Aquí puedes optar por mostrar un mensaje al usuario o manejar el error de alguna otra manera
-    }
-  } else {
-    console.log("Borrado cancelado");
-  }
-};
-
+  const tableFields = [
+    { name: 'nombre', label: 'Nombre de la Tabla', type: 'text' },
+    { name: 'descripcion', label: 'Descripción', type: 'text' },
+  ];
 
   return (
     <div className="data-dictionary">
       <h2>Diccionario de Datos</h2>
+      {error && <p className="error-message">{error}</p>} {/* Mostrar mensaje de error */}
       {tables.length === 0 ? (
         <p>Cargando datos...</p>
       ) : (
         <DataTable
-          columns={['Descripción', 'ID', 'Nombre']}
+          columns={['ID', 'Nombre', 'Descripción']}
           data={tables}
-          onDelete={handleDeleteTable} // Pasamos la función de eliminar
+          onDelete={handleDeleteTable}
         />
       )}
       <h3>Agregar Nueva Tabla</h3>
       <Form
-        fields={[
-          { name: 'nombre', label: 'Nombre de la Tabla', type: 'text' },
-          { name: 'descripcion', label: 'Descripción', type: 'text' },
-        ]}
-        onSubmit={handleAddTable} // Pasamos la función de agregar
+        fields={tableFields}
+        onSubmit={handleAddTable}
       />
     </div>
   );
 }
 
 export default DataDictionary;
-
