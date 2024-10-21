@@ -6,22 +6,6 @@ import '../components/DDL.css'; // Importar el CSS
 
 function DDL() {
   const [commands, setCommands] = useState([]);
-<<<<<<< HEAD
-  const [responseMessage, setResponseMessage] = useState('');
-
-  const handleSubmit = async (formData) => {
-    setCommands([...commands, formData.command]);
-    
-    try {
-      const response = await axios.post('http://localhost:5000/create', {
-        sql_command: formData.command,
-      });
-
-      setResponseMessage(response.data.message);
-    } catch (error) {
-      console.error('Error al enviar el comando:', error);
-      setResponseMessage(error.response ? error.response.data.error : 'Error en la conexión con el backend');
-=======
   const [tableData, setTableData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -41,7 +25,6 @@ function DDL() {
       console.error(error);
       setError('No se pudo encontrar la tabla especificada.');
       setTableData(null);
->>>>>>> origin/ingjorge
     }
   };
 
