@@ -1,0 +1,58 @@
+/* Estilo para la ventana del modal */
+.custom-modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 400px; /* Ajusta el ancho del modal */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Estilo para el overlay del modal */
+  .custom-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Contenedor de opciones */
+  .options-container {
+    display: flex;
+    flex-direction: column; /* Alineación vertical */
+    margin-bottom: 20px; /* Espacio inferior */
+  }
+  
+  /* Estilo para los botones de opciones */
+  .option-button {
+    background-color: #7ED321; /* Color de fondo */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+    margin: 5px 0; /* Espaciado entre botones */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    transition: background-color 0.3s; /* Transición suave para el color de fondo */
+  }
+  
+  /* Estilo al pasar el ratón sobre los botones */
+  .option-button:hover {
+    background-color: #007B3E; /* Color de fondo al pasar el ratón */
+  }
+  
+  /* Estilo para la opción seleccionada */
+  .selected {
+    background-color: #007B3E; /* Color de fondo para la opción seleccionada */
+  }
+  
