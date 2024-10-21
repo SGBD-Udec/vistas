@@ -12,8 +12,10 @@
   }
   
   .content {
-    padding: 20px;
-    flex-grow: 1;
+    max-height: 500px; /* Limita la altura del contenido */
+    overflow-y: auto;  /* Habilita el scroll vertical si el contenido excede la altura */
+    padding: 10px;     /* Espaciado interno */
+    border: 1px solid #ccc; /* Para visualizar los bordes (opcional) */
   }
   
   .header {
@@ -85,17 +87,30 @@
     width: 200px;
     text-align: center;
   }
+
+  .data-dictionary {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
   
   .data-table {
     width: 100%;
     border-collapse: collapse;
   }
   
-  .data-table th, .data-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-  }
-  
+  .data-table th {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+  .data-table th,
+.data-table td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+
+
   .form-group {
     margin-bottom: 40px;
   }

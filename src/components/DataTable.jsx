@@ -1,6 +1,16 @@
 import React from 'react';
 
-function DataTable({ columns, data }) {
+function DataTable({ columns, data, onDelete }) {
+  if (!Array.isArray(data) || data.length === 0) {
+    return <p>No hay datos disponibles.</p>;
+  }
+
+  const columnMap = {
+    'Descripción': 'descripcion',
+    'ID': 'id',
+    'Nombre': 'nombre'
+  };
+
   return (
     <table className="data-table">
       <thead>
@@ -12,11 +22,46 @@ function DataTable({ columns, data }) {
       </thead>
       <tbody>
         {data.map((row, idx) => (
-          <tr key={idx}>
-            {columns.map((col) => (
-              <td key={col}>{row[col]}</td>
-            ))}
-          </tr>
+          <React.Fragment key={idx}>
+            <tr>
+              {columns.map((col) => (
+                <td key={col}>{row[columnMap[col]] !== undefined ? row[columnMap[col]] : 'N/A'}</td>
+              ))}
+            </tr>
+            {/* Fila adicional para mostrar las columnas y restricciones */}
+            {row.columnas && row.columnas.length > 0 && (
+              <tr>
+                <td colSpan={columns.length + 1}>
+                  <strong>Columnas:</strong>
+                  <ul>
+                    {row.columnas.map((col, i) => (
+                      <li key={i}>
+                        {col.nombre} - {col.tipo} 
+                        {col.restricciones.length > 0 && (
+                          <span> ({col.restricciones.join(', ')})</span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </td>
+              </tr>
+            )}
+            {/* Fila adicional para mostrar los registros */}
+            {row.registros && row.registros.length > 0 && (
+              <tr>
+                <td colSpan={columns.length + 1}>
+                  <strong>Registros:</strong>
+                  <ul>
+                    {row.registros.map((registro, i) => (
+                      <li key={i}>
+                        {JSON.stringify(registro)}
+                      </li>
+                    ))}
+                  </ul>
+                </td>
+              </tr>
+            )}
+          </React.Fragment>
         ))}
       </tbody>
     </table>
