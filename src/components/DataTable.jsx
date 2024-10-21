@@ -18,7 +18,6 @@ function DataTable({ columns, data, onDelete }) {
           {columns.map((col) => (
             <th key={col}>{col}</th>
           ))}
-          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -28,9 +27,6 @@ function DataTable({ columns, data, onDelete }) {
               {columns.map((col) => (
                 <td key={col}>{row[columnMap[col]] !== undefined ? row[columnMap[col]] : 'N/A'}</td>
               ))}
-              <td>
-                <button onClick={() => onDelete(row.id)}>Eliminar</button>
-              </td>
             </tr>
             {/* Fila adicional para mostrar las columnas y restricciones */}
             {row.columnas && row.columnas.length > 0 && (
@@ -44,6 +40,21 @@ function DataTable({ columns, data, onDelete }) {
                         {col.restricciones.length > 0 && (
                           <span> ({col.restricciones.join(', ')})</span>
                         )}
+                      </li>
+                    ))}
+                  </ul>
+                </td>
+              </tr>
+            )}
+            {/* Fila adicional para mostrar los registros */}
+            {row.registros && row.registros.length > 0 && (
+              <tr>
+                <td colSpan={columns.length + 1}>
+                  <strong>Registros:</strong>
+                  <ul>
+                    {row.registros.map((registro, i) => (
+                      <li key={i}>
+                        {JSON.stringify(registro)}
                       </li>
                     ))}
                   </ul>
