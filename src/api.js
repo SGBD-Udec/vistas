@@ -1,7 +1,7 @@
 //api.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/ejemplos'; // Cambia esto si tu API está en otro puerto o dominio
+const API_URL = 'http://localhost:5000/tablas'; // Cambia esto si tu API está en otro puerto o dominio
 
 // Función para obtener ejemplos
 export const obtenerEjemplos = async () => {
