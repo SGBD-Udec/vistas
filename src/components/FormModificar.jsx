@@ -1,34 +1,39 @@
 import React, { useState } from 'react';
 
 function FormModificar({ onSubmit }) {
+  const [operation, setOperation] = useState('MODIFICAR'); // 'MODIFICAR' o 'ELIMINAR'
   const [tableName, setTableName] = useState('');
-  const [operation, setOperation] = useState('MODIFICAR'); // Puede ser 'MODIFICAR' o 'ELIMINAR'
-  const [conditionField, setConditionField] = useState('');
-  const [conditionValue, setConditionValue] = useState('');
-  const [updateField, setUpdateField] = useState('');
-  const [updateValue, setUpdateValue] = useState('');
+  const [newTableName, setNewTableName] = useState(''); // Nombre nuevo de la tabla
+  const [description, setDescription] = useState(''); // Nueva descripción
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const formData = {
-      tableName,
-      operation,
-      conditionField,
-      conditionValue,
-      updateField,
-      updateValue,
+      operation,     // Indica si es una operación de "MODIFICAR" o "ELIMINAR"
+      tableName,     // Nombre de la tabla actual
+      newTableName,  // Nuevo nombre de la tabla (si aplica)
+      description,   // Nueva descripción (si aplica)
     };
+
     onSubmit(formData);
-    // Limpiar campos
+
+    // Limpiar campos después de enviar
     setTableName('');
-    setConditionField('');
-    setConditionValue('');
-    setUpdateField('');
-    setUpdateValue('');
+    setNewTableName('');
+    setDescription('');
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <div>
+        <label>Operación:</label>
+        <select value={operation} onChange={(e) => setOperation(e.target.value)}>
+          <option value="MODIFICAR">Modificar</option>
+          <option value="ELIMINAR">Eliminar</option>
+        </select>
+      </div>
+
       <div>
         <label>Nombre de la Tabla:</label>
         <input 
@@ -39,58 +44,40 @@ function FormModificar({ onSubmit }) {
           required 
         />
       </div>
-      <div>
-        <label>Operación:</label>
-        <select value={operation} onChange={(e) => setOperation(e.target.value)}>
-          <option value="MODIFICAR">Modificar</option>
-          <option value="ELIMINAR">Eliminar</option>
-        </select>
-      </div>
+
       {operation === 'MODIFICAR' && (
         <>
           <div>
-            <label>Campo a Modificar:</label>
+            <label>Nuevo Nombre de la Tabla:</label>
             <input 
               type="text" 
-              value={updateField} 
-              onChange={(e) => setUpdateField(e.target.value)} 
-              placeholder="Campo a modificar" 
+              value={newTableName} 
+              onChange={(e) => setNewTableName(e.target.value)} 
+              placeholder="Nuevo nombre de la tabla" 
               required 
             />
           </div>
+
           <div>
-            <label>Nuevo Valor:</label>
+            <label>Nueva Descripción:</label>
             <input 
               type="text" 
-              value={updateValue} 
-              onChange={(e) => setUpdateValue(e.target.value)} 
-              placeholder="Nuevo valor" 
+              value={description} 
+              onChange={(e) => setDescription(e.target.value)} 
+              placeholder="Nueva descripción de la tabla" 
               required 
             />
           </div>
         </>
       )}
-      <div>
-        <label>Campo de Condición:</label>
-        <input 
-          type="text" 
-          value={conditionField} 
-          onChange={(e) => setConditionField(e.target.value)} 
-          placeholder="Campo para condición" 
-          required 
-        />
-      </div>
-      <div>
-        <label>Valor de Condición:</label>
-        <input 
-          type="text" 
-          value={conditionValue} 
-          onChange={(e) => setConditionValue(e.target.value)} 
-          placeholder="Valor para condición" 
-          required 
-        />
-      </div>
-      <button type="submit">Enviar</button>
+
+      {operation === 'ELIMINAR' && (
+        <div>
+          <p>Al eliminar la tabla, se eliminará toda la estructura y los datos asociados.</p>
+        </div>
+      )}
+
+      <button type="submit">{operation === 'MODIFICAR' ? 'Modificar Tabla' : 'Eliminar Tabla'}</button>
     </form>
   );
 }
