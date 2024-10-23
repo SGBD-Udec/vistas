@@ -7,10 +7,41 @@ function DDL() {
   const [commands, setCommands] = useState([]);
   const [tableData, setTableData] = useState(null);
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(''); // Mensaje de éxito
 
-  const handleSubmitModificar = (formData) => {
-    setCommands([...commands, formData]);
-    console.log(formData);
+  const handleSubmitModificar = async (formData) => {
+    try {
+      const { operation, tableName, newTableName, description } = formData;
+
+      // Solo enviar solicitud de modificación si es 'MODIFICAR'
+      if (operation === 'MODIFICAR') {
+        const response = await fetch(`http://localhost:5000/api/dml_ddl/tablas/${tableName}/modificar`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            nombre: newTableName, // Cambiar a 'nombre'
+            descripcion: description,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Error al modificar la tabla');
+        }
+
+        const data = await response.json();
+        setSuccessMessage(data.message); // Mostrar mensaje de éxito
+      }
+
+      // Agregar la operación al historial de comandos
+      setCommands([...commands, formData]);
+      setError(null);
+    } catch (error) {
+      console.error(error);
+      setError('No se pudo modificar la tabla.');
+      setSuccessMessage(''); // Limpiar mensaje de éxito en caso de error
+    }
   };
 
   const handleVerTabla = async (tableName) => {
@@ -34,6 +65,7 @@ function DDL() {
       <h3>Ver Tabla</h3>
       <FormVerTabla onSubmit={handleVerTabla} />
 
+      {successMessage && <p className="success-message">{successMessage}</p>} {/* Mensaje de éxito */}
       {error && <p className="error-message">{error}</p>}
       {tableData && (
         <div>
@@ -64,9 +96,9 @@ function DDL() {
       <ul>
         {commands.map((cmd, idx) => (
           <li key={idx}>
-            {cmd.operation} en {cmd.tableName} con condición {cmd.conditionField} = {cmd.conditionValue}
+            {cmd.operation} en {cmd.tableName}
             {cmd.operation === 'MODIFICAR' && (
-              <span> (Modificar: {cmd.updateField} = {cmd.updateValue})</span>
+              <span> (Nuevo Nombre: {cmd.newTableName}, Nueva Descripción: {cmd.description})</span>
             )}
           </li>
         ))}
