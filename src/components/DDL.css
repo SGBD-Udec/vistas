@@ -4,6 +4,7 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 20px;
+    
   }
   
   h2 {
@@ -33,6 +34,9 @@ body {
   label {
     margin-bottom: 5px;
     font-weight: bold;
+    
+    
+    
   }
   
   /* Estilos para los inputs y botones */
@@ -41,8 +45,15 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+    width: 100%;
+    max-width: 200px;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    
   }
   
+
   button {
     padding: 10px;
     background-color: #007BFF;
@@ -51,10 +62,13 @@ body {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    
+   
   }
   
   button:hover {
     background-color: #007B3E;
+    
   }
   
   /* Estilos para tablas */
@@ -62,12 +76,16 @@ body {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    
+    
   }
   
   .data-table th, .data-table td {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: left;
+    
+    
   }
   
   .data-table tr:nth-child(even) {
