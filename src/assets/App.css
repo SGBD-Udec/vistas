@@ -4,7 +4,7 @@
   }
 
   body {
-    font-family: 'Roboto', sans-serif; /* fuente de la letra */
+    font-family: 'Roboto', sans-serif; /* fuente del texto*/
   }
 
   .main-content {
@@ -53,26 +53,31 @@
   .link-explicacion a {
     background-color: #7ED321;
     color: black;
+    border-radius: 4px;
   }
   
   .link-dashboard a {
     background-color: rgb(255, 255, 255);
     color: white;
+    border-radius: 4px;
   }
   
   .link-diccionario a {
     background-color: #7ED321;
     color: black;
+    border-radius: 4px;
   }
   
   .link-ddl a {
     background-color: rgb(255, 255, 255);
     color: white;
+    border-radius: 4px;
   }
   
   .link-dml a {
     background-color: #7ED321;
     color: white;
+    border-radius: 4px;
   }  
 
 .card-container {
@@ -120,6 +125,9 @@
     color: white;
     padding: 10px;
     border: none;
+    max-width: 160px;
+    margin-bottom: 10px;
+    padding: 5px;
   }
   /* Asegúrate de que toda la pantalla esté cubierta */
 html, body, #root {
