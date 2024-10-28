@@ -8,7 +8,8 @@ const API_URL = 'http://localhost:5000/api/dml_ddl';
 
 function DML() {
     const [records, setRecords] = useState([]);
-    const [errorMessage, setErrorMessage] = useState(''); // Estado para el mensaje de error
+    const [errorMessage, setErrorMessage] = useState('');
+    const [selectedAction, setSelectedAction] = useState('insertar'); // Estado para controlar el formulario a mostrar
 
     const handleInsertar = async (formData) => {
         try {
@@ -17,7 +18,7 @@ function DML() {
             });
             setRecords([...records, { operation: 'INSERT', table: formData.table }]);
             console.log(response.data.message);
-            setErrorMessage(''); // Limpiar mensaje de error al insertar con éxito
+            setErrorMessage('');
         } catch (error) {
             console.error("Error al insertar registro:", error);
             setErrorMessage("Error al insertar el registro.");
@@ -33,7 +34,7 @@ function DML() {
             });
             setRecords([...records, { operation: 'UPDATE', table: formData.table }]);
             console.log(response.data.message);
-            setErrorMessage(''); // Limpiar mensaje de error al actualizar con éxito
+            setErrorMessage('');
         } catch (error) {
             console.error("Error al actualizar registro:", error);
             setErrorMessage("Error al actualizar el registro.");
@@ -50,7 +51,7 @@ function DML() {
             });
             setRecords([...records, { operation: 'DELETE', table: formData.table }]);
             console.log(response.data.message);
-            setErrorMessage(''); // Limpiar mensaje de error al eliminar con éxito
+            setErrorMessage('');
         } catch (error) {
             if (error.response && error.response.data) {
                 setErrorMessage(error.response.data.message || "Error desconocido al eliminar el registro.");
@@ -65,24 +66,33 @@ function DML() {
         <div className="dml">
             <h2>Operaciones DML</h2>
 
-            {/* Mostrar mensaje de error si existe */}
-            {errorMessage && <div className="error-message" style={{ color: 'red' }}>{errorMessage}</div>}
+            {/* Selector para elegir la acción */}
+            <select onChange={(e) => setSelectedAction(e.target.value)} value={selectedAction}>
+                <option value="insertar">Insertar</option>
+                <option value="actualizar">Actualizar</option>
+                <option value="eliminar">Eliminar</option>
+            </select>
+
 
             <h3>Historial de Operaciones</h3>
+
+            {/* Mostrar mensaje de error si existe */}
+            {errorMessage && <div className="error-message" style={{ color: 'red' }}>{errorMessage}</div>}
             <ul>
                 {records.map((record, idx) => (
                     <li key={idx}>{record.operation} en {record.table}</li>
                 ))}
             </ul>
 
-            <h3>Insertar Registro</h3>
-            <FormInsertar onSubmit={handleInsertar} />
-
-            <h3>Actualizar Registro</h3>
-            <FormActualizar onSubmit={handleActualizar} />
-
-            <h3>Eliminar Registro</h3>
-            <FormEliminar onSubmit={handleEliminar} />
+            {/* Mostrar el formulario correspondiente basado en la selección */}
+            {selectedAction === 'insertar' && <h3>Insertar Registro</h3>}
+            {selectedAction === 'insertar' && <FormInsertar onSubmit={handleInsertar} />}
+            
+            {selectedAction === 'actualizar' && <h3>Actualizar Registro</h3>}
+            {selectedAction === 'actualizar' && <FormActualizar onSubmit={handleActualizar} />}
+            
+            {selectedAction === 'eliminar' && <h3>Eliminar Registro</h3>}
+            {selectedAction === 'eliminar' && <FormEliminar onSubmit={handleEliminar} />}
         </div>
     );
 }

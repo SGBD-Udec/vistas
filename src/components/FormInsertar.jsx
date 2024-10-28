@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './MyForm.css';
 
 function FormInsertar({ onSubmit }) {
     const [formData, setFormData] = useState({ table: '', value: '', valor: '' });
@@ -15,11 +16,37 @@ function FormInsertar({ onSubmit }) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input name="table" placeholder="Nombre de la Tabla" value={formData.table} onChange={handleChange} required />
-            <input name="value" placeholder="Campo" value={formData.value} onChange={handleChange} required />
-            <input name="valor" placeholder="Valor" value={formData.valor} onChange={handleChange} required />
-            <button type="submit">Insertar</button>
+        <form onSubmit={handleSubmit} className="form-container">
+            <input 
+                name="table" 
+                placeholder="Nombre de la Tabla" 
+                value={formData.table} 
+                onChange={handleChange} 
+                required 
+                className="form-input" 
+            />
+            <input 
+                name="value" 
+                placeholder="Campo" 
+                value={formData.value} 
+                onChange={handleChange} 
+                required 
+                className="form-input" 
+            />
+            <input 
+                name="valor" 
+                placeholder="Valor" 
+                value={formData.valor} 
+                onChange={handleChange} 
+                required 
+                className="form-input" 
+            />
+            <button 
+                type="submit" 
+                className="form-button"
+            >
+                Insertar
+            </button>
         </form>
     );
 }

@@ -35,12 +35,18 @@ label {
   font-weight: bold;
 }
 
-/* Estilos para los inputs y botones */
 input[type="text"], input[type="number"], select {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
+  width: 150px; /* Ajusta el ancho aquí */
+  height: 40px; /* Ajusta la altura aquí */
+}
+
+/* Puedes agregar un estilo adicional para mantener el diseño uniforme */
+input[type="text"], input[type="number"] {
+  box-sizing: border-box; /* Asegúrate de que el padding y el borde se incluyan en el ancho total */
 }
 
 button:hover {

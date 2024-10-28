@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './MyForm.css'; // Asegúrate de que la ruta sea correcta
 
 function FormActualizar({ onSubmit }) {
     const [formData, setFormData] = useState({ table: '', value: '', valor: '', campoCondicion: '', valorCondicion: '' });
@@ -15,13 +16,53 @@ function FormActualizar({ onSubmit }) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input name="table" placeholder="Nombre de la Tabla" value={formData.table} onChange={handleChange} required />
-            <input name="value" placeholder="Campo" value={formData.value} onChange={handleChange} required />
-            <input name="valor" placeholder="Nuevo Valor" value={formData.valor} onChange={handleChange} required />
-            <input name="campoCondicion" placeholder="Campo de Condición" value={formData.campoCondicion} onChange={handleChange} required />
-            <input name="valorCondicion" placeholder="Valor de Condición" value={formData.valorCondicion} onChange={handleChange} required />
-            <button type="submit">Actualizar</button>
+        <form onSubmit={handleSubmit} className="form-container">
+            <input 
+                name="table" 
+                placeholder="Nombre de la Tabla" 
+                value={formData.table} 
+                onChange={handleChange} 
+                required 
+                className="form-input" 
+            />
+            <input 
+                name="value" 
+                placeholder="Campo" 
+                value={formData.value} 
+                onChange={handleChange} 
+                required 
+                className="form-input" 
+            />
+            <input 
+                name="valor" 
+                placeholder="Nuevo Valor" 
+                value={formData.valor} 
+                onChange={handleChange} 
+                required 
+                className="form-input" 
+            />
+            <input 
+                name="campoCondicion" 
+                placeholder="Campo de Condición" 
+                value={formData.campoCondicion} 
+                onChange={handleChange} 
+                required 
+                className="form-input" 
+            />
+            <input 
+                name="valorCondicion" 
+                placeholder="Valor de Condición" 
+                value={formData.valorCondicion} 
+                onChange={handleChange} 
+                required 
+                className="form-input" 
+            />
+            <button 
+                type="submit" 
+                className="form-button"
+            >
+                Actualizar
+            </button>
         </form>
     );
 }
