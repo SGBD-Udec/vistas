@@ -1,46 +1,91 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FormModificar from '../components/FormModificar';
 import FormVerTabla from '../components/FormVerTabla';
-import '../components/DDL.css'; // Importar el CSS
+import FormRelacion from '../components/FormRelacion';
+import '../components/DDL.css';
 
 function DDL() {
   const [commands, setCommands] = useState([]);
-  const [tableData, setTableData] = useState(null);
+  const [tablaData, setTablaData] = useState(null);
+  const [relations, setRelations] = useState([]);
   const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(''); // Mensaje de éxito
+  const [successMessage, setSuccessMessage] = useState('');
+
+  useEffect(() => {
+    fetchRelations();
+  }, []);
+
+  const fetchRelations = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/dml_ddl/relaciones');
+      if (!response.ok) throw new Error('Error al obtener relaciones');
+      const data = await response.json();
+      setRelations(data);
+    } catch (error) {
+      console.error(error);
+      setError('No se pudieron cargar las relaciones.');
+    }
+  };
+
+  const handleAddRelation = async (relationData) => {
+    try {
+      const response = await fetch('http://localhost:5000/api/dml_ddl/relaciones', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(relationData),
+      });
+      if (!response.ok) throw new Error('Error al agregar la relación');
+      setSuccessMessage('Relación agregada exitosamente');
+      fetchRelations();
+    } catch (error) {
+      console.error(error);
+      setError('No se pudo agregar la relación.');
+    }
+  };
+
+  const handleDeleteRelation = async (relationData) => {
+    try {
+      const response = await fetch('http://localhost:5000/api/dml_ddl/relaciones', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(relationData),
+      });
+      if (response.status === 204) {
+        setSuccessMessage('Relación eliminada exitosamente');
+        fetchRelations();
+      } else {
+        throw new Error('Error al eliminar la relación');
+      }
+    } catch (error) {
+      console.error(error);
+      setError('No se pudo eliminar la relación.');
+    }
+  };
 
   const handleSubmitModificar = async (formData) => {
     try {
       const { operation, tableName, newTableName, description } = formData;
-
-      // Solo enviar solicitud de modificación si es 'MODIFICAR'
       if (operation === 'MODIFICAR') {
         const response = await fetch(`http://localhost:5000/api/dml_ddl/tablas/${tableName}/modificar`, {
           method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            nombre: newTableName, // Cambiar a 'nombre'
-            descripcion: description,
-          }),
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre: newTableName, descripcion: description }),
         });
-
-        if (!response.ok) {
-          throw new Error('Error al modificar la tabla');
-        }
-
+        if (!response.ok) throw new Error('Error al modificar la tabla');
         const data = await response.json();
-        setSuccessMessage(data.message); // Mostrar mensaje de éxito
+        setSuccessMessage(data.message);
+      } else if (operation === 'ELIMINAR') {
+        const response = await fetch(`http://localhost:5000/api/dml_ddl/tablas/${tableName}`, { method: 'DELETE' });
+        if (response.status === 204) setSuccessMessage('Tabla eliminada exitosamente');
+        else if (response.status === 404) throw new Error('Tabla no encontrada.');
+        else throw new Error('Error al eliminar la tabla');
       }
-
-      // Agregar la operación al historial de comandos
       setCommands([...commands, formData]);
       setError(null);
     } catch (error) {
       console.error(error);
-      setError('No se pudo modificar la tabla.');
-      setSuccessMessage(''); // Limpiar mensaje de éxito en caso de error
+      setError(error.message || 'No se pudo completar la operación.');
+      setSuccessMessage('');
     }
   };
 
@@ -49,12 +94,12 @@ function DDL() {
       const response = await fetch(`http://localhost:5000/api/dml_ddl/tablas/${tableName}`);
       if (!response.ok) throw new Error('Error al obtener la tabla');
       const data = await response.json();
-      setTableData(data);
+      setTablaData(data);
       setError(null);
     } catch (error) {
       console.error(error);
       setError('No se pudo encontrar la tabla especificada.');
-      setTableData(null);
+      setTablaData(null);
     }
   };
 
@@ -65,44 +110,88 @@ function DDL() {
       <h3>Ver Tabla</h3>
       <FormVerTabla onSubmit={handleVerTabla} />
 
-      {successMessage && <p className="success-message">{successMessage}</p>} {/* Mensaje de éxito */}
-      {error && <p className="error-message">{error}</p>}
-      {tableData && (
+      {tablaData && (
         <div>
-          <h4>Tabla: {tableData.nombre}</h4>
-          <p>Descripción: {tableData.descripcion}</p>
+          <h4>Tabla: {tablaData.nombre}</h4>
+          <p>Descripción: {tablaData.descripcion}</p>
           <h5>Columnas:</h5>
-          <ul>
-            {tableData.columnas.map((col, idx) => (
-              <li key={idx}>{col.nombre} - {col.tipo} {col.restricciones.length > 0 && `(${col.restricciones.join(', ')})`}</li>
-            ))}
-          </ul>
-          {tableData.registros.length > 0 ? (
-            <div>
-              <h5>Registros:</h5>
-              <ul>
-                {tableData.registros.map((reg, idx) => (
-                  <li key={idx}>{JSON.stringify(reg)}</li>
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Restricciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tablaData.columnas.map((col, idx) => (
+                <tr key={idx}>
+                  <td>{col.nombre}</td>
+                  <td>{col.tipo}</td>
+                  <td>{col.restricciones.length > 0 ? col.restricciones.join(', ') : 'Ninguna'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <h5>Registros:</h5>
+          {tablaData.registros.length > 0 ? (
+            <table className="data-table">
+              <thead>
+                <tr>
+                  {tablaData.columnas.map((col, idx) => (
+                    <th key={idx}>{col.nombre}</th> // Encabezados basados en columnas
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {tablaData.registros.map((reg, idx) => (
+                  <tr key={idx}>
+                    {tablaData.columnas.map((col, colIdx) => (
+                      <td key={colIdx}>{reg[col.nombre] || '-'}</td> // Mostrar valor o un guion si no existe
+                    ))}
+                  </tr>
                 ))}
-              </ul>
-            </div>
+              </tbody>
+            </table>
           ) : (
             <p>No hay registros disponibles.</p>
           )}
         </div>
       )}
 
-      <h3>Historial de Comandos</h3>
-      <ul>
-        {commands.map((cmd, idx) => (
-          <li key={idx}>
-            {cmd.operation} en {cmd.tableName}
-            {cmd.operation === 'MODIFICAR' && (
-              <span> (Nuevo Nombre: {cmd.newTableName}, Nueva Descripción: {cmd.description})</span>
-            )}
-          </li>
-        ))}
-      </ul>
+      <FormRelacion onSubmit={handleAddRelation} />
+
+      {successMessage && <p className="success-message">{successMessage}</p>}
+      {error && <p className="error-message">{error}</p>}
+
+      <h3>Relaciones entre Tablas</h3>
+      <table className="data-table">
+        <thead>
+          <tr>
+            <th>Tabla Origen</th>
+            <th>Columna Origen</th>
+            <th>Tabla Destino</th>
+            <th>Columna Destino</th>
+            <th>Tipo Relación</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {relations.map((rel, idx) => (
+            <tr key={idx}>
+              <td>{rel.tabla_origen}</td>
+              <td>{rel.columna_origen}</td>
+              <td>{rel.tabla_destino}</td>
+              <td>{rel.columna_destino}</td>
+              <td>{rel.tipo_relacion}</td>
+              <td>
+                <button onClick={() => handleDeleteRelation(rel)}>Eliminar</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
