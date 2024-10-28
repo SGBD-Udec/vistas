@@ -1,104 +1,81 @@
 /* Estilos generales */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-    
-  }
-  
-  h2 {
-    color: #333;
-  }
-  
-  /* Estilos para el contenedor de los formularios y tablas */
-  .ddl, .data-dictionary {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Estilos para formularios */
-  form {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-  }
-  
-  form div {
-    margin-bottom: 10px;
-  }
-  
-  label {
-    margin-bottom: 5px;
-    font-weight: bold;
-    
-    
-    
-  }
-  
-  /* Estilos para los inputs y botones */
-  input[type="text"], input[type="number"], select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    width: 100%;
-    max-width: 200px;
-    padding: 8px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    
-  }
-  
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
 
-  button {
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    
-   
-  }
-  
-  button:hover {
-    background-color: #007B3E;
-    
-  }
-  
-  /* Estilos para tablas */
-  .data-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    
-    
-  }
-  
-  .data-table th, .data-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-    
-    
-  }
-  
-  .data-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .data-table tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  /* Estilos para mensajes de error */
-  .error-message {
-    color: red;
-    font-weight: bold;
-  }
-  
+h2 {
+  color: #333;
+}
+
+/* Estilos para el contenedor de los formularios y tablas */
+.ddl, .data-dictionary {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para formularios */
+form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+form div {
+  margin-bottom: 10px;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"], input[type="number"], select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 150px; /* Ajusta el ancho aquí */
+  height: 40px; /* Ajusta la altura aquí */
+}
+
+/* Puedes agregar un estilo adicional para mantener el diseño uniforme */
+input[type="text"], input[type="number"] {
+  box-sizing: border-box; /* Asegúrate de que el padding y el borde se incluyan en el ancho total */
+}
+
+button:hover {
+  background-color: #007B3E;
+}
+
+/* Estilos para tablas */
+.dataTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.dataTable th, .dataTable td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.dataTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.dataTable tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Estilos para mensajes de error */
+.error-message {
+  color: red;
+  font-weight: bold;
+}

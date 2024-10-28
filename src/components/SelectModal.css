@@ -1,18 +1,19 @@
 /* Estilo para la ventana del modal */
 .custom-modal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    right: auto;
-    bottom: auto;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    width: 400px; /* Ajusta el ancho del modal */
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
+  position: fixed; /* Cambiado de absolute a fixed */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%; /* Ancho máximo flexible */
+  width: 300px; /* Puedes mantener el ancho fijo si lo prefieres */
+  max-height: 80%; /* Altura máxima para evitar que se salga de la pantalla */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  overflow-y: auto; /* Añadir scroll si el contenido excede la altura */
+}
+
   
   /* Estilo para el overlay del modal */
   .custom-modal-overlay {
@@ -40,12 +41,42 @@
     color: white; /* Color del texto */
     border: none; /* Sin borde */
     border-radius: 4px; /* Bordes redondeados */
+    max-width: 300px;
     padding: 10px; /* Espaciado interno */
     margin: 5px 0; /* Espaciado entre botones */
     cursor: pointer; /* Cambia el cursor al pasar el ratón */
     transition: background-color 0.3s; /* Transición suave para el color de fondo */
   }
-  
+
+  .modal-actions {
+    display: flex;
+    flex-direction: column; /* Alinear botones verticalmente */
+    gap: 15px; /* Espacio entre los botones */
+    align-items: center; /* Centrar los botones horizontalmente si es necesario */
+    margin-top: 20px; /* Espacio superior para el contenedor si es necesario */
+}
+
+.select-button,
+.close-button {
+    background-color: #000000; /* color del botón */
+    color: white;
+    border: none;
+    max-width: 200px;
+    padding: 10px; /* Aumentar el padding para mejor clic */
+    cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+    transition: background-color 0.3s; /* Animación suave al cambiar el color */
+}
+
+.select-button:hover,
+.close-button:hover {
+    background-color: #333333; /* Color de fondo al pasar el mouse */
+}
+
+.select-button:disabled {
+    background-color: #555555; /* Color cuando el botón está deshabilitado */
+    cursor: not-allowed; /* Cambiar el cursor para indicar que está deshabilitado */
+}
+
   /* Estilo al pasar el ratón sobre los botones */
   .option-button:hover {
     background-color: #007B3E; /* Color de fondo al pasar el ratón */
