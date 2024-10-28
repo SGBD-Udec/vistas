@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import FormInsertar from '../components/FormInsertar'; // Componente para el formulario de inserción
-import FormActualizar from '../components/FormActualizar'; // Componente para el formulario de actualización
-import FormEliminar from '../components/FormEliminar'; // Componente para el formulario de eliminación
+import FormInsertar from '../components/FormInsertar';
+import FormActualizar from '../components/FormActualizar';
+import FormEliminar from '../components/FormEliminar';
 import axios from 'axios';
 
 const API_URL = 'http://localhost:5000/api/dml_ddl';
 
 function DML() {
     const [records, setRecords] = useState([]);
+    const [errorMessage, setErrorMessage] = useState(''); // Estado para el mensaje de error
 
     const handleInsertar = async (formData) => {
         try {
@@ -16,8 +17,10 @@ function DML() {
             });
             setRecords([...records, { operation: 'INSERT', table: formData.table }]);
             console.log(response.data.message);
+            setErrorMessage(''); // Limpiar mensaje de error al insertar con éxito
         } catch (error) {
             console.error("Error al insertar registro:", error);
+            setErrorMessage("Error al insertar el registro.");
         }
     };
 
@@ -30,8 +33,10 @@ function DML() {
             });
             setRecords([...records, { operation: 'UPDATE', table: formData.table }]);
             console.log(response.data.message);
+            setErrorMessage(''); // Limpiar mensaje de error al actualizar con éxito
         } catch (error) {
             console.error("Error al actualizar registro:", error);
+            setErrorMessage("Error al actualizar el registro.");
         }
     };
 
@@ -45,7 +50,13 @@ function DML() {
             });
             setRecords([...records, { operation: 'DELETE', table: formData.table }]);
             console.log(response.data.message);
+            setErrorMessage(''); // Limpiar mensaje de error al eliminar con éxito
         } catch (error) {
+            if (error.response && error.response.data) {
+                setErrorMessage(error.response.data.message || "Error desconocido al eliminar el registro.");
+            } else {
+                setErrorMessage("Error al conectar con el servidor.");
+            }
             console.error("Error al eliminar registro:", error);
         }
     };
@@ -53,7 +64,10 @@ function DML() {
     return (
         <div className="dml">
             <h2>Operaciones DML</h2>
-            
+
+            {/* Mostrar mensaje de error si existe */}
+            {errorMessage && <div className="error-message" style={{ color: 'red' }}>{errorMessage}</div>}
+
             <h3>Historial de Operaciones</h3>
             <ul>
                 {records.map((record, idx) => (
