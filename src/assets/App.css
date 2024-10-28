@@ -17,7 +17,17 @@
     padding: 10px;     /* Espaciado interno */
     border: 1px solid #ccc; /* Para visualizar los bordes (opcional) */
   }
-  
+  input[type="text"], input[type="number"], select {
+    width: 100%; /* Ocupará el 100% del ancho de su contenedor */
+    max-width: 300px; /* Limitar el ancho máximo de los inputs */
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde del input */
+    border-radius: 4px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+    margin-bottom: 10px; /* Espacio entre inputs */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+}
+
   .header {
     background-color: #ffffff; /* color de donde */
     color: rgb(255, 255, 255);
@@ -123,9 +133,8 @@
   button {
     background-color: #000000; /* color del boton enviar */
     color: white;
-    padding: 10px;
     border: none;
-    max-width: 160px;
+    max-width: 200px;
     margin-bottom: 10px;
     padding: 5px;
   }

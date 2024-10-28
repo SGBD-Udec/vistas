@@ -10,7 +10,7 @@ const Footer = () => {
       <p>
         Creadores de el Prototipo de Módulo DML y DDL: Cristian Felipe Gonzalez Rodriguez, Daniel Eduardo Bautista Diaz
       </p>
-      <p>Líder del Proyecto: Luis Carlos</p>
+      <p>Líder del Proyecto: Luis Carlos Garzon Bedoya</p>
       <p>&copy; {new Date().getFullYear()} Prototipo SGBD - Versión 0.1</p>
     </footer>
   );

@@ -13,19 +13,22 @@ function Form({ fields, onSubmit }) {
   const [errorMessages, setErrorMessages] = useState({}); // Estado para mensajes de error
 
   const tiposDeDatos = [
-    { value: "INTEGER", label: "INTEGER" },
+    { value: "INT", label: "INTEGER" },
     { value: "VARCHAR", label: "VARCHAR" },
+    { value: "TEXT", label: "TEXT" },
     { value: "DATE", label: "DATE" },
-    { value: "BOOLEAN", label: "BOOLEAN" },
+    { value: "BIGINT", label: "BIGINT" },
+    { value: "DECIMAL", label: "DECIMAL" },
     { value: "FLOAT", label: "FLOAT" },
     { value: "DOUBLE", label: "DOUBLE" },
-    { value: "DECIMAL", label: "DECIMAL" },
-    { value: "TEXT", label: "TEXT" },
+    { value: "BOOLEAN", label: "BOOLEAN" },
+    { value: "DATETIME", label: "DATETIME" },
+    { value: "TIMESTAMP", label: "TIMESTAMP" },
     { value: "BLOB", label: "BLOB" },
     { value: "CHAR", label: "CHAR" },
-    { value: "TIMESTAMP", label: "TIMESTAMP" },
-    { value: "DATETIME", label: "DATETIME" }
-  ];
+    
+    
+];
 
   const opcionesRestricciones = [
     { value: "PRIMARY KEY", label: "PRIMARY KEY" },
