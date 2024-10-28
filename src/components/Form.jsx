@@ -22,10 +22,8 @@ function Form({ fields, onSubmit }) {
     { value: "FLOAT", label: "FLOAT" },
     { value: "DOUBLE", label: "DOUBLE" },
     { value: "BOOLEAN", label: "BOOLEAN" },
-    { value: "DATE", label: "DATE" },
     { value: "DATETIME", label: "DATETIME" },
     { value: "TIMESTAMP", label: "TIMESTAMP" },
-    { value: "TEXT", label: "TEXT" },
     { value: "BLOB", label: "BLOB" },
     { value: "CHAR", label: "CHAR" },
     
