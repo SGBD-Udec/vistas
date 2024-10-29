@@ -11,6 +11,7 @@ import Sidebar from './components/Sidebar'; // Sidebar
 import './assets/App.css'; // Importa tu CSS
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Relaciones from './views/Relaciones';
 
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
               <Route path="/data-dictionary" element={<DataDictionary />} />
               <Route path="/ddl" element={<DDL />} />
               <Route path="/dml" element={<DML />} />
+              <Route path="/relaciones" element={<Relaciones />} />
               <Route path="*" element={<NotFound />} /> {/* Ruta para manejar 404 */}
             </Routes>
           </section>
