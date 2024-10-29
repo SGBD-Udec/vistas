@@ -19,8 +19,8 @@ function Dashboard() {
         if (response.data && response.data.estadisticas) {
           setStatistics({
             tablesCount: response.data.estadisticas.total_tablas || 0,
-            totalDmlOperations: response.data.estadisticas.total_dml_operations || 0,
-            totalDdlCommands: response.data.estadisticas.total_ddl_commands || 0,
+            totalDmlOperations: response.data.estadisticas.total_dml_operations || 0, // Ajustado a la clave correcta
+            totalDdlCommands: response.data.estadisticas.total_ddl_commands || 0, // Ajustado a la clave correcta
             error: null,
           });
         } else {

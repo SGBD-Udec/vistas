@@ -1,221 +1,226 @@
 .app {
-    display: flex;
-    flex-direction: column;
-  }
-
-  body {
-    font-family: 'Roboto', sans-serif; /* fuente del texto*/
-  }
-
-  .main-content {
-    display: flex;
-  }
-  
-  .content {
-    max-height: 500px; /* Limita la altura del contenido */
-    overflow-y: auto;  /* Habilita el scroll vertical si el contenido excede la altura */
-    padding: 10px;     /* Espaciado interno */
-    border: 1px solid #ccc; /* Para visualizar los bordes (opcional) */
-  }
-  input[type="text"], input[type="number"], select {
-    width: 100%; /* Ocupará el 100% del ancho de su contenedor */
-    max-width: 300px; /* Limitar el ancho máximo de los inputs */
-    padding: 10px; /* Espaciado interno */
-    border: 1px solid #ccc; /* Borde del input */
-    border-radius: 4px; /* Bordes redondeados */
-    font-size: 16px; /* Tamaño de fuente */
-    margin-bottom: 10px; /* Espacio entre inputs */
-    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
-}
-
-  .header {
-    background-color: #ffffff; /* color de donde */
-    color: rgb(255, 255, 255);
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .sidebar {
-    background-color: #f4f4f4;
-    padding: 20px;
-    width: 200px;
-  }
-  
-  .sidebar ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .sidebar ul li {
-    margin: 10px 0;
-  }
-  
-  .sidebar ul li a {
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 20px;
-    display: block;
-    padding:15px 20px;
-    width: calc(100% - 40px);
-    
-  }
-  
-  .link-explicacion a {
-    background-color: #7ED321;
-    color: black;
-    border-radius: 4px;
-  }
-  
-  .link-dashboard a {
-    background-color: rgb(255, 255, 255);
-    color: white;
-    border-radius: 4px;
-  }
-  
-  .link-diccionario a {
-    background-color: #7ED321;
-    color: black;
-    border-radius: 4px;
-  }
-  
-  .link-ddl a {
-    background-color: rgb(255, 255, 255);
-    color: white;
-    border-radius: 4px;
-  }
-  
-  .link-dml a {
-    background-color: #7ED321;
-    color: white;
-    border-radius: 4px;
-  }  
-
-.card-container {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 20px;
-    width: 200px;
-    text-align: center;
-  }
-
-  .data-dictionary {
-    padding: 20px;
-    background-color: #f9f9f9;
-  }
-  
-  .data-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .data-table th {
-    background-color: #ffffff;
-    color: #000000;
-}
-
-  .data-table th,
-.data-table td {
-  border: 1px solid black;
-  padding: 8px;
-  text-align: left;
-}
-
-
-  .form-group {
-    margin-bottom: 40px;
-  }
-  
-  button {
-    background-color: #000000; /* color del boton enviar */
-    color: white;
-    border: none;
-    max-width: 200px;
-    margin-bottom: 10px;
-    padding: 5px;
-  }
-  /* Asegúrate de que toda la pantalla esté cubierta */
-html, body, #root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-/* Layout general */
-.layout {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Toda la altura de la pantalla */
+}
+
+body {
+  font-family: 'Roboto', sans-serif; /* fuente del texto*/
+}
+
+.main-content {
+  display: flex;
+}
+
+.content {
+  max-height: 500px; /* Limita la altura del contenido */
+  overflow-y: auto;  /* Habilita el scroll vertical si el contenido excede la altura */
+  padding: 10px;     /* Espaciado interno */
+  border: 1px solid #ccc; /* Para visualizar los bordes (opcional) */
+}
+input[type="text"], input[type="number"], select {
+  width: 100%; /* Ocupará el 100% del ancho de su contenedor */
+  max-width: 300px; /* Limitar el ancho máximo de los inputs */
+  padding: 10px; /* Espaciado interno */
+  border: 1px solid #ccc; /* Borde del input */
+  border-radius: 4px; /* Bordes redondeados */
+  font-size: 16px; /* Tamaño de fuente */
+  margin-bottom: 10px; /* Espacio entre inputs */
+  box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
 }
 
 .header {
-  display: flex;          /* Usar flexbox para centrar */
-  justify-content: center; /* Centrar horizontalmente */
-  align-items: center;    /* Centrar verticalmente */
-  height: 50px;           /* Altura del header (ajusta según sea necesario) */
-  background-color: #007B3E; /* Color de fondo (opcional) */
-}
-.header h1 {
-  margin: 0;  
-  color: rgb(255, 255, 255);           /* Eliminar margen por defecto del h1 */
-}
-
-.main {
-  display: flex;
-  flex: 1; /* Ocupa el resto del espacio debajo del header */
-}
-
-/* Estilo del sidebar */
-aside {
-  background-color: #000000;
-  color: white;
-  width: 250px; /* Ancho del sidebar */
-  padding: 20px;
-  height: calc(100vh - 60px); /* Altura calculada restando el header */
-  box-sizing: border-box;
-}
-
-/* Estilo del contenido principal */
-.content {
-  flex: 1; /* El contenido ocupará todo el espacio restante */
-  padding: 20px;
-  background-color: #ffffff;
+  background-color: #ffffff; /* color de donde */
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  text-align: center;
 }
 
 .sidebar {
-  background-color: #007B3E;
-  width: 150px;
-  padding: 30px;
-  height: 350px
+  background-color: #f4f4f4;
+  padding: 20px;
+  width: 200px;
 }
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
 .sidebar ul li {
-  margin-bottom: 0px; /* Ajusta el espacio entre los elementos de la lista */
+  margin: 10px 0;
 }
 
 .sidebar ul li a {
   text-decoration: none;
-  color: rgb(0, 0, 0);
   font-weight: bold;
   font-size: 20px;
+  display: block;
+  padding:15px 20px;
+  width: calc(100% - 40px);
+  
+}
+
+.link-explicacion a {
+  background-color: #7ED321;
+  color: black;
+  border-radius: 4px;
+}
+
+.link-dashboard a {
+  background-color: rgb(255, 255, 255);
+  color: white;
+  border-radius: 4px;
+}
+
+.link-diccionario a {
+  background-color: #7ED321;
+  color: black;
+  border-radius: 4px;
+}
+
+.link-ddl a {
+  background-color: rgb(255, 255, 255);
+  color: white;
+  border-radius: 4px;
+}
+
+.link-dml a {
+  background-color: #7ED321;
+  color: white;
+  border-radius: 4px;
+}  
+
+.link-relaciones a {
+  background-color: rgb(255, 255, 255);
+  color: white;
+  border-radius: 4px;
+}
+
+.card-container {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+}
+
+.data-dictionary {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.data-table th,
+.data-table td {
+border: 1px solid black;
+padding: 8px;
+text-align: left;
+}
+
+
+.form-group {
+  margin-bottom: 40px;
+}
+
+button {
+  background-color: #000000; /* color del boton enviar */
+  color: white;
+  border: none;
+  max-width: 200px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+/* Asegúrate de que toda la pantalla esté cubierta */
+html, body, #root {
+height: 100%;
+margin: 0;
+padding: 0;
+}
+
+/* Layout general */
+.layout {
+display: flex;
+flex-direction: column;
+height: 100vh; /* Toda la altura de la pantalla */
+}
+
+.header {
+display: flex;          /* Usar flexbox para centrar */
+justify-content: center; /* Centrar horizontalmente */
+align-items: center;    /* Centrar verticalmente */
+height: 50px;           /* Altura del header (ajusta según sea necesario) */
+background-color: #007B3E; /* Color de fondo (opcional) */
+}
+.header h1 {
+margin: 0;  
+color: rgb(255, 255, 255);           /* Eliminar margen por defecto del h1 */
+}
+
+.main {
+display: flex;
+flex: 1; /* Ocupa el resto del espacio debajo del header */
+}
+
+/* Estilo del sidebar */
+aside {
+background-color: #000000;
+color: white;
+width: 250px; /* Ancho del sidebar */
+padding: 20px;
+height: calc(100vh - 60px); /* Altura calculada restando el header */
+box-sizing: border-box;
+}
+
+/* Estilo del contenido principal */
+.content {
+flex: 1; /* El contenido ocupará todo el espacio restante */
+padding: 20px;
+background-color: #ffffff;
+}
+
+.sidebar {
+background-color: #007B3E;
+width: 150px;
+padding: 30px;
+height: 420px
+}
+.sidebar ul li {
+margin-bottom: 0px; /* Ajusta el espacio entre los elementos de la lista */
+}
+
+.sidebar ul li a {
+text-decoration: none;
+color: rgb(0, 0, 0);
+font-weight: bold;
+font-size: 20px;
 }
 
 .footer {
-  background-color: #000000; /* Color de fondo */
-  text-align: center; /* Centra el texto */
-  padding: 10px; /* Espaciado alrededor del texto */
-  position: fixed; /* Fija el footer en la parte inferior */
-  left: 0;
-  bottom: 0;
-  width: 100%; /* Abarca todo el ancho de la ventana */
-  font-size: 14px; /* Tamaño de fuente */
-  color: #ffffff; /* Color del texto */
+background-color: #000000; /* Color de fondo */
+text-align: center; /* Centra el texto */
+padding: 10px; /* Espaciado alrededor del texto */
+position: fixed; /* Fija el footer en la parte inferior */
+left: 0;
+bottom: 0;
+width: 100%; /* Abarca todo el ancho de la ventana */
+font-size: 14px; /* Tamaño de fuente */
+color: #ffffff; /* Color del texto */
 }
 
 .footer p {
-  margin: 5px 0; /* Espacio vertical entre párrafos */
+margin: 5px 0; /* Espacio vertical entre párrafos */
 }
-
