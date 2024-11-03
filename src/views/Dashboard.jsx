@@ -13,18 +13,27 @@ function Dashboard() {
   useEffect(() => {
     const fetchStatistics = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/dml_ddl/estadisticas');
-        
-        // Verifica si la respuesta contiene la estructura esperada
-        if (response.data && response.data.estadisticas) {
-          setStatistics({
-            tablesCount: response.data.estadisticas.total_tablas || 0,
-            totalDmlOperations: response.data.estadisticas.total_dml_operations || 0, // Ajustado a la clave correcta
-            totalDdlCommands: response.data.estadisticas.total_ddl_commands || 0, // Ajustado a la clave correcta
-            error: null,
-          });
+        // Obtener estadísticas de tablas
+        const response1 = await axios.get('http://localhost:5000/estadisticas');
+        if (response1.data && response1.data.estadisticas) {
+          setStatistics(prevState => ({
+            ...prevState,
+            tablesCount: response1.data.estadisticas.total_tablas || 0,
+          }));
         } else {
-          throw new Error("Estructura de respuesta inesperada");
+          throw new Error("Estructura de respuesta inesperada desde el endpoint de estadísticas");
+        }
+
+        // Obtener estadísticas de operaciones DML y DDL
+        const response2 = await axios.get('http://localhost:5000/api/dml_ddl/estadisticas');
+        if (response2.data && response2.data.estadisticas) {
+          setStatistics(prevState => ({
+            ...prevState,
+            totalDmlOperations: response2.data.estadisticas.total_dml_operations || 0,
+            totalDdlCommands: response2.data.estadisticas.total_ddl_commands || 0,
+          }));
+        } else {
+          throw new Error("Estructura de respuesta inesperada desde el endpoint DML/DDL");
         }
       } catch (error) {
         console.error('Error al obtener estadísticas:', error);
@@ -43,9 +52,9 @@ function Dashboard() {
       <h2>Dashboard Principal</h2>
       {statistics.error && <p className="error-message">{statistics.error}</p>}
       <div className="card-container">
-        <Card title="Tablas Definidas" content={`${statistics.tablesCount} Tablas`} />
-        <Card title="Operaciones DDL" content={`${statistics.totalDdlCommands} Comandos DDL ejecutados`} />
-        <Card title="Operaciones DML" content={`${statistics.totalDmlOperations} Comandos DML ejecutados`} />
+        <Card title="Tablas Definidas" content={${statistics.tablesCount} Tablas} />
+        <Card title="Operaciones DDL" content={${statistics.totalDdlCommands} Comandos DDL ejecutados} />
+        <Card title="Operaciones DML" content={${statistics.totalDmlOperations} Comandos DML ejecutados} />
       </div>
     </div>
   );

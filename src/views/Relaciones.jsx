@@ -15,7 +15,7 @@ function Relaciones() {
 
   const fetchRelations = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/dml_ddl/relaciones');
+      const response = await fetch('http://localhost:5000/relaciones');
       if (!response.ok) throw new Error('Error al obtener relaciones');
       const data = await response.json();
       setRelations(data);
@@ -27,7 +27,7 @@ function Relaciones() {
 
   const handleAddRelation = async (relationData) => {
     try {
-      const response = await fetch('http://localhost:5000/api/dml_ddl/relaciones', {
+      const response = await fetch('http://localhost:5000/relaciones', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(relationData),
@@ -43,22 +43,24 @@ function Relaciones() {
 
   const handleDeleteRelation = async (relationData) => {
     try {
-      const response = await fetch('http://localhost:5000/api/dml_ddl/relaciones', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(relationData),
-      });
-      if (response.status === 204) {
-        setSuccessMessage('Relación eliminada exitosamente');
-        fetchRelations();
-      } else {
-        throw new Error('Error al eliminar la relación');
-      }
+        const response = await fetch('http://localhost:5000/relaciones', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(relationData), // Asegúrate de que esto esté estructurado correctamente
+        });
+        if (response.status === 204) {
+            setSuccessMessage('Relación eliminada exitosamente');
+            fetchRelations(); // Asegúrate de que esta función esté implementada
+        } else {
+            throw new Error('Error al eliminar la relación');
+        }
     } catch (error) {
-      console.error(error);
-      setError('No se pudo eliminar la relación.');
+        console.error(error);
+        setError('No se pudo eliminar la relación.');
     }
-  };
+};
+
+
 
   return (
     <div className="relaciones">
