@@ -29,12 +29,19 @@ input[type="text"], input[type="number"], select {
 }
 
 .header {
-  background-color: #ffffff; /* color de donde */
-  color: rgb(255, 255, 255);
-  padding: 10px;
+  background-color: #ffffff; /* Color de fondo */
+  color: rgb(0, 0, 0); /* Color del texto, ajustado para contraste */
+  padding: 20px; /* Aumenta el padding para hacer más grande el header */
   text-align: center;
+  display: flex;
+  align-items: center;
 }
 
+.header-logo {
+  width: 55px; /* Aumenta el tamaño de la imagen */
+  height: auto;
+  margin-right: 15px; /* Espacio entre el logo y el título */
+}
 .sidebar {
   background-color: #f4f4f4;
   padding: 20px;
