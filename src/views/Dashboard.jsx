@@ -52,9 +52,9 @@ function Dashboard() {
       <h2>Dashboard Principal</h2>
       {statistics.error && <p className="error-message">{statistics.error}</p>}
       <div className="card-container">
-        <Card title="Tablas Definidas" content={${statistics.tablesCount} Tablas} />
-        <Card title="Operaciones DDL" content={${statistics.totalDdlCommands} Comandos DDL ejecutados} />
-        <Card title="Operaciones DML" content={${statistics.totalDmlOperations} Comandos DML ejecutados} />
+      <Card title="Tablas Definidas" content={`${statistics.tablesCount} Tablas`} />
+        <Card title="Operaciones DDL" content={`${statistics.totalDdlCommands} Comandos DDL ejecutados`} />
+        <Card title="Operaciones DML" content={`${statistics.totalDmlOperations} Comandos DML ejecutados`} />
       </div>
     </div>
   );
